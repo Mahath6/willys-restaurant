@@ -1,6 +1,7 @@
 
 Willy’s Restaurant
 A full-stack Django web application for a restaurant with login, menu, reservation, and contact pages.
+Users are allowed to access the main content of the website only when they are logged in.
 
 
 ------------ Features------------
