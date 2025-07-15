@@ -1,0 +1,25 @@
+{% extends 'restaurant_app/base.html' %}
+{% load static %}
+{% block title %}Menu - Willy's{% endblock %}
+
+{% block content %}
+<!-- 🔵 Bootstrap Modal -->
+<div class="modal fade show" id="menuModal" tabindex="-1" aria-labelledby="menuModalLabel" aria-hidden="true" style="display: block;">
+  <div class="modal-dialog modal-dialog-centered modal-lg">
+    <div class="modal-content p-3" style="background: linear-gradient(to bottom right, #ee1a1a, #600000); color: white; border-radius: 15px; box-shadow: 0 0 20px rgba(0,0,0,0.6);">
+      <div class="modal-header border-0">
+        <h5 class="modal-title" id="menuModalLabel" style="margin: auto;">Willy's Menu</h5>
+        <a href="{% url 'home' %}" class="btn-close btn-close-white position-absolute end-0 me-3 mt-2" aria-label="Close"></a>
+      </div>
+      <div class="modal-body text-center">
+        <img src="{% static 'images/menuR.jpg' %}" alt="Menu Image"
+             class="img-fluid rounded-4 shadow"
+             style="max-height: 75vh; mix-blend-mode: multiply; opacity: 0.95;">
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Optional: Dimmed backdrop -->
+<div class="modal-backdrop fade show" style="background-color: rgba(0, 0, 0, 0.7);"></div>
+{% endblock %}

@@ -1,0 +1,280 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>{% block title %}Willy's Restaurant{% endblock %}</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
+
+  <style>
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      background-color: #7f0808;
+      font-family: 'Roboto', sans-serif;
+      margin: 0;
+      padding: 0;
+    }
+
+    .hero {
+      position: relative;
+      height: 100vh;
+      overflow: hidden;
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(to bottom right, rgba(152, 7, 7, 0.6), rgba(0, 0, 0, 0.5));
+      z-index: 1;
+    }
+
+    .hero img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      filter: brightness(0.6);
+    }
+
+    .top-bar {
+      position: absolute;
+      top: 20px;
+      left: 0;
+      right: 0;
+      padding: 0 40px;
+      z-index: 2;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+    }
+
+    .site-name {
+  font-family: 'Pacifico', cursive;
+  font-size: 3.2rem;
+  background: linear-gradient(120deg, #f857a6, #ff5858, #ffc371);
+  background-size: 300% 300%;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+  animation: siteNameGlow 4s ease infinite, fadeInSiteName 1.5s ease-out forwards;
+  text-align: center;
+  letter-spacing: 1.5px;
+  text-shadow: 0 0 5px rgba(255, 180, 180, 0.4), 0 0 20px rgba(255, 100, 100, 0.2);
+  filter: drop-shadow(2px 2px 6px rgba(0, 0, 0, 0.5));
+}
+
+@keyframes siteNameGlow {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+
+
+
+
+    .intro-text {
+      color: #fff;
+      max-width: 700px;
+      font-size: 1.1rem;
+      font-weight: 300;
+      margin-top: 10px;
+      text-shadow: 1px 1px 5px rgba(0,0,0,0.6);
+      animation: fadeInMoveDown 1.5s ease-out forwards;
+    }
+
+    @keyframes fadeInSiteName {
+      from { opacity: 0; transform: translateY(-20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes fadeInMoveDown {
+      from { opacity: 0; transform: translateY(-20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+@keyframes glowFade {
+  from { text-shadow: 0 0 8px rgba(255, 204, 204, 0.3); }
+  to { text-shadow: 0 0 20px rgba(255, 204, 204, 0.8); }
+}
+
+
+
+
+
+
+
+
+    .fade-in-buttons {
+      opacity: 0;
+      animation: fadeInMoveDown 1s ease-out forwards;
+      animation-delay: 0.5s;
+    }
+
+    .btn {
+      transition: all 0.3s ease;
+      border-radius: 50px;
+      padding: 8px 18px;
+    }
+
+    .btn:hover {
+      transform: scale(1.05);
+      opacity: 0.95;
+      box-shadow: 0 0 15px rgba(255, 255, 255, 0.3);
+    }
+
+    #scrollTopBtn {
+      background: #dc3545;
+      border-radius: 50%;
+      padding: 10px 15px;
+      font-size: 1.2rem;
+    }
+
+    /* Optional: Better modal styling */
+    .modal-content {
+      border-radius: 15px;
+      box-shadow: 0 0 20px rgba(0,0,0,0.5);
+    }
+
+
+.intro-text.glass-blur {
+  background: rgba(255, 46, 46, 0.07);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  padding: 25px;
+  border-radius: 15px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+  text-align: center;
+  animation: fadeInMoveDown 1.5s ease-out forwards;
+}
+
+.intro-text .tagline {
+  font-size: 1.3rem;
+  color: #e97705;
+  text-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
+  font-weight: 400;
+  line-height: 1.5;
+}
+
+.intro-text .quote {
+  font-size: 1.1rem;
+  font-style: italic;
+  color: #b2850b;
+  text-shadow: 0 0 10px rgba(255, 255, 153, 0.3);
+  display: inline-block;
+  margin-top: 10px;
+}
+
+
+
+
+
+
+  </style>
+</head>
+
+<body>
+
+<!-- Hero Section -->
+<div class="hero">
+  <img src="{% static 'images/restaurant.jpg' %}" alt="Willy's Restaurant Banner">
+
+  <!-- Top Navigation & Brand -->
+  <div class="top-bar">
+    <div class="site-name">Willy's Restaurant</div>
+
+    
+
+
+    <nav id="navButtons" class="{% if user.is_authenticated %}fade-in-buttons mt-3{% endif %}">
+      {% if user.is_authenticated %}
+        <a href="{% url 'home' %}#about" class="btn btn-danger mx-1">𝙰𝚋𝚘𝚞𝚝 𝚄𝚜</a>
+        <a href="{% url 'menu' %}" class="btn btn-danger mx-1">𝙼𝚎𝚗𝚞</a>
+        <a href="{% url 'contact' %}#contact-section" class="btn btn-danger mx-1">𝙲𝚘𝚗𝚝𝚊𝚌𝚝</a>
+        <a href="{% url 'reservation' %}#reservation-section" class="btn btn-danger mx-1">𝚁𝚎𝚜𝚎𝚛𝚟𝚊𝚝𝚒𝚘𝚗</a>
+        <a href="{% url 'logout' %}" class="btn btn-danger mx-1">𝗟𝗼𝗴𝗼𝘂𝘁</a>
+      {% else %}
+        <button class="btn btn-success mx-3 mt-3" data-bs-toggle="modal" data-bs-target="#loginModal">𝐋𝐨𝐠𝐢𝐧</button>
+      {% endif %}
+    </nav>
+
+{% if user.is_authenticated %}
+  <div class="intro-text glass-blur">
+  <p class="tagline">
+    Welcome to <strong>Willy’s Restaurant</strong> — where culinary artistry meets cozy elegance.<br>
+    Nestled in the heart of Kochi, our space blends rich heritage with a modern twist, offering an unforgettable dining journey.
+  </p>
+  
+  
+  <em class="quote">“At Willy’s, it’s more than food — it’s a feeling.”</em>
+</div>
+{% endif %}
+
+
+  </div>
+</div>
+
+
+
+
+
+<!-- Login Modal -->
+<div class="modal fade" id="loginModal" tabindex="-1">
+  <div class="modal-dialog">
+    <div class="modal-content p-3">
+      <h4 class="text-center mb-3">Login to Willy's</h4>
+      <form method="post" action="{% url 'login' %}">
+        {% csrf_token %}
+        <div class="mb-3">
+          <input type="text" name="username" class="form-control" required placeholder="Username">
+        </div>
+        <div class="mb-3">
+          <input type="password" name="password" class="form-control" required placeholder="Password">
+        </div>
+        <button type="submit" class="btn btn-danger w-100">Login</button>
+      </form>
+    </div>
+  </div>
+</div>
+
+<!-- Page-specific content -->
+{% block content %}{% endblock %}
+
+<!-- Scroll to Top Button -->
+<button id="scrollTopBtn" class="btn btn-danger position-fixed" style="bottom: 30px; right: 30px; display: none; z-index: 999;">↑</button>
+
+<!-- Bootstrap Bundle -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+<script>
+  window.addEventListener('scroll', () => {
+    const btn = document.getElementById('scrollTopBtn');
+    btn.style.display = window.scrollY > 200 ? 'block' : 'none';
+  });
+
+  document.getElementById('scrollTopBtn').addEventListener('click', () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  });
+
+  window.addEventListener('DOMContentLoaded', () => {
+    const toastEl = document.querySelector('.toast');
+    if (toastEl) {
+      const toast = new bootstrap.Toast(toastEl, { delay: 2000 });
+      toast.show();
+    }
+  });
+</script>
+
+{% block scripts %}{% endblock %}
+
+
+</body>
+</html>

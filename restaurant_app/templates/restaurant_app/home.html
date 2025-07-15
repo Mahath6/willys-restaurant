@@ -1,0 +1,64 @@
+{% extends 'restaurant_app/base.html' %}
+{% block title %}Home - Willy's{% endblock %}
+
+{% block content %}
+<!-- ✅ Login success popup -->
+{% if show_toast %}
+<div class="position-fixed top-0 end-0 p-3" style="z-index: 1050;">
+    <div class="toast align-items-center text-white bg-success border-0" role="alert" aria-live="assertive" aria-atomic="true">
+        <div class="d-flex">
+            <div class="toast-body">
+                👋 Welcome back to Willy’s Restaurant!
+            </div>
+            <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast"></button>
+        </div>
+    </div>
+</div>
+
+{% endif %}
+
+<!-- ✅ Aesthetic About Section -->
+<section id="about" class="container my-5">
+    <h2 class="text-center mb-4 text-warning fw-bold display-5">About Willy’s Restaurant</h2>
+    
+    <div class="card border-0 shadow-lg p-4" style="background: #1a1a1a;">
+
+        <p class="fs-5 lh-lg text-light text-justify">
+            At <strong>Willy’s Restaurant</strong>, we invite you to experience a harmonious blend of tradition, flavor, and elegance.
+            Nestled in the heart of <strong>Kochi</strong>, we serve more than just meals — we serve moments.
+            Whether you're craving rich North Indian curries, spicy Southern delicacies, or timeless classics,
+            our culinary team crafts each dish with passion and authenticity.
+        </p>
+        <p class="fs-5 lh-lg text-light text-justify">
+            From carefully sourced ingredients to artistically plated dishes, every element of your dining experience is curated with precision.
+            Our chefs draw inspiration from India’s vast gastronomic landscape, blending age-old recipes with modern finesse.
+        </p>
+        <p class="fs-5 lh-lg text-light text-justify">
+            But Willy’s is more than just food. It's a warm, welcoming atmosphere where families celebrate, friends gather, and memories are made.
+            From intimate dinners to group celebrations, our ambiance strikes the perfect balance between comfort and sophistication.
+        </p>
+        <ul class="fs-5 text-light">
+            <li>🌿 A diverse and inclusive menu for all tastes and dietary needs</li>
+            <li>🤝 Personalized service with Kerala’s signature hospitality</li>
+            <li>🌟 A serene yet vibrant dining space designed for unforgettable moments</li>
+        </ul>
+        <p class="fs-5 lh-lg text-light text-justify">
+            Whether you dine in or reserve a special evening with us,
+            <strong>Willy’s Restaurant promises more than satisfaction — we deliver delight.</strong>
+        </p>
+    </div>
+</section>
+
+{% endblock %}
+
+<script>
+    window.addEventListener('DOMContentLoaded', () => {
+        const toastEl = document.querySelector('.toast');
+        if (toastEl) {
+            setTimeout(() => {
+                const bsToast = bootstrap.Toast.getOrCreateInstance(toastEl);
+                bsToast.hide();
+            }, 4000); // Auto-dismiss after 4 seconds
+        }
+    });
+</script>

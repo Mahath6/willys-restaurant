@@ -1,0 +1,74 @@
+
+
+{% extends 'restaurant_app/base.html' %}
+{% block title %}Contact - Willy's{% endblock %}
+
+{% block content %}
+<!-- ✅ Toast Message -->
+<div class="toast-container position-fixed top-0 start-50 translate-middle-x p-3" style="z-index: 2000">
+  <div id="messageToast" class="toast show align-items-center border-0 shadow-lg fade rounded-4"
+       role="alert" aria-live="assertive" aria-atomic="true"
+       style="background: linear-gradient(135deg, #6d0b00, #28a745); color: #938e8e; animation: popSlide 0.5s ease-out;">
+    <div class="d-flex">
+      <div class="toast-body fs-6 fw-semibold">
+        💬 Got feedback or questions? <br>We’d love to hear from you!
+      </div>
+      <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+    </div>
+  </div>
+</div>
+
+
+<!-- ✅ Contact Section -->
+<section id="contact-section" class="py-5">
+  <div class="container bg-dark rounded shadow p-5 text-white">
+    <h2 class="text-center mb-4 text-warning">𝕮𝖔𝖓𝖙𝖆𝖈𝖙 𝖀𝖘</h2>
+    <p class="text-center mb-4">𝕎𝕖 𝕨𝕠𝕦𝕝𝕕 𝕝𝕠𝕧𝕖 𝕥𝕠 𝕙𝕖𝕒𝕣 𝕗𝕣𝕠𝕞 𝕪𝕠𝕦! ℝ𝕖𝕒𝕔𝕙 𝕠𝕦𝕥 𝕨𝕚𝕥𝕙 𝕒𝕟𝕪 𝕢𝕦𝕖𝕤𝕥𝕚𝕠𝕟𝕤/𝕗𝕖𝕖𝕕𝕓𝕒𝕔𝕜/𝕔𝕠𝕞𝕡𝕝𝕒𝕚𝕟𝕥𝕤.</p>
+
+    <div class="row">
+      <div class="col-md-6">
+        <form id="contactForm" onsubmit="showConfirmation(event)">
+          <div class="mb-3">
+            <label class="form-label">Your Name</label>
+            <input type="text" class="form-control" placeholder="Enter your name" required>
+          </div>
+          <div class="mb-3">
+            <label class="form-label">Email address</label>
+            <input type="email" class="form-control" placeholder="name@example.com" required>
+          </div>
+          <div class="mb-3">
+            <label class="form-label">Message</label>
+            <textarea class="form-control" rows="4" placeholder="Type your message here..." required></textarea>
+          </div>
+          <button type="submit" class="btn btn-warning mt-2 w-100">Send Message</button>
+        </form>
+      </div>
+
+      <div class="col-md-6 mt-4 mt-md-0">
+        <h5>Our Location📍</h5>
+        <p>Willy's Restaurant, MG Road,<br>Kochi, Kerala, India</p>
+        <h5>Email📧</h5>
+        <p>support@willysrestaurant.com</p>
+        <h5>Phone📞</h5>
+        <p>+91 98765 43210</p>
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock %}
+
+{% block scripts %}
+<script>
+  function showConfirmation(e) {
+    e.preventDefault(); // Prevent actual form submission
+
+    // Show Bootstrap toast
+    const toastEl = document.getElementById("messageToast");
+    const toast = new bootstrap.Toast(toastEl, { delay: 3000 });
+    toast.show();
+
+    // Reset the form
+    document.getElementById("contactForm").reset();
+  }
+</script>
+{% endblock %}

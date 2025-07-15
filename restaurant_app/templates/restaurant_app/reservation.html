@@ -1,0 +1,56 @@
+{% extends 'restaurant_app/base.html' %}
+{% block title %}Reservation - Willy's{% endblock %}
+{% block content %}
+
+<!-- ✅ Reservation Success Modal -->
+{% if show_popup and reservation_data %}
+<div class="modal fade" id="reservationModal" tabindex="-1" aria-labelledby="reservationModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content p-3">
+      <div class="modal-header">
+        <h5 class="modal-title" id="reservationModalLabel">Reservation Confirmed</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <p><strong>Name:</strong> {{ reservation_data.name }}</p>
+        <p><strong>Date:</strong> {{ reservation_data.date }}</p>
+        <p><strong>Time:</strong> {{ reservation_data.time }}</p>
+        <p><strong>Guests:</strong> {{ reservation_data.people }}</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  window.addEventListener('load', function () {
+    var modal = new bootstrap.Modal(document.getElementById('reservationModal'));
+    modal.show();
+  });
+</script>
+{% endif %}
+
+
+<div id="reservation-section" class="container d-flex justify-content-center align-items-center" style="min-height: 100vh;">
+  <div class="p-4 rounded shadow" style="max-width: 500px; width: 100%; backdrop-filter: blur(10px); background: rgba(255, 255, 255, 0.15); border: 1px solid rgba(255, 255, 255, 0.3);">
+    <h2 class="text-center mb-4 text-warning">𝔅𝔬𝔬𝔨 𝔞 𝔗𝔞𝔟𝔩𝔢</h2>
+    <form method="POST" action="{% url 'reservation' %}">
+      {% csrf_token %}
+      <div class="mb-3">
+        <input type="text" name="name" class="form-control" placeholder="Your Name" required>
+      </div>
+      <div class="mb-3">
+        <input type="date" name="date" class="form-control" required>
+      </div>
+      <div class="mb-3">
+        <input type="time" name="time" class="form-control" required>
+      </div>
+      <div class="mb-3">
+        <input type="number" name="guests" class="form-control" placeholder="Number of People" required>
+      </div>
+      <button type="submit" class="btn btn-success w-100">Reserve</button>
+    </form>
+  </div>
+</div>
+
+
+{% endblock %}
